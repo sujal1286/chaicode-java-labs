@@ -19,7 +19,7 @@ import java.util.Scanner;
  *
  * <p>Rules:
  * <ul>
- *   <li>Skip blank lines</li>
+ *   <li>Skip blank lines</li>  
  *   <li>Ignore negative prices</li>
  *   <li>If scanner is null, return 0.0</li>
  * </ul>
@@ -27,12 +27,50 @@ import java.util.Scanner;
  * @param scanner input source
  * @return order total
  */
-public final class CafeOrder {
 
-    private CafeOrder() {}
+public class CafeOrder {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter prices one by one. Type DONE when finished:");
+
+        double total = readOrderTotal(sc);
+
+        System.out.println("Order Total: " + String.format("%.2f", total));
+
+        sc.close();
+    }
 
     public static double readOrderTotal(Scanner scanner) {
-        // Your code here
-        return 0.0;
+
+        if (scanner == null) {
+            return 0.0;
+        }
+
+        double total = 0.0;
+
+        while (scanner.hasNextLine()) {
+
+            String line = scanner.nextLine().trim();
+
+            if (line.equals("DONE") || line.equals( "done")) {
+                break;
+            }
+
+            if (line.isEmpty()) {
+                continue;
+            }
+
+            double price = Double.parseDouble(line);
+
+            if (price < 0) {
+                continue;
+            }
+
+            total = total + price;
+        }
+
+        return total;
     }
 }
