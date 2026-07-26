@@ -23,12 +23,30 @@ import com.chaicode.variables.model.EmployeeProfile;
  * @param profile the employee profile
  * @return formatted badge string
  */
-public final class EmployeeBadge {
 
-    private EmployeeBadge() {}
+
+public  class EmployeeBadge {
+
+    public static void main(String[] args) {
+
+        EmployeeProfile p1 = new EmployeeProfile("Priya Sharma", 42, "Engineering", true);
+        EmployeeProfile p2 = new EmployeeProfile("Ravi Mehta", 7, "Design", false);
+
+        System.out.println(formatBadge(p1));
+        System.out.println(formatBadge(p2));
+    }
 
     public static String formatBadge(EmployeeProfile profile) {
-        // Your code here
-        return "";
+
+        String paddedId = String.format("%05d", profile.employeeId());
+
+        String role;
+        if (profile.isManager()) {
+            role = "MANAGER";
+        } else {
+            role = "STAFF";
+        }
+
+        return "[ID-" + paddedId + "] " + profile.name() + " | " + profile.department() + " | " + role;
     }
 }
